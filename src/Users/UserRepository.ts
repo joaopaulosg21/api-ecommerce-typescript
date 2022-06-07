@@ -21,5 +21,9 @@ export class UserRepository implements IUserRepository{
     public async returnEmail(email: string): Promise<users|null> {
         return this.model.users.findFirst({where:{email:email}})
     }
+
+    public async returnUser(email: string, password: string): Promise<users | null> {
+        return this.model.users.findFirst({where:{email:email,password:password}});
+    }
     
 }
