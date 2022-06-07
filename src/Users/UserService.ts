@@ -5,35 +5,35 @@ import { UserRepository } from "./UserRepository";
 import { validateEmail, validateLogin, validateUser } from "../validators/validateUser";
 const userRepository = new UserRepository();
 export class UserService implements IUserService{
-    public async saveUser(req: Request, res: Response): Promise<void> {
+    public async saveUser(req: Request, res: Response): Promise<Response> {
         const user:IUser = req.body;
         try{
             await validateUser(user);
             const email = await validateEmail(user.email);
             if(email){
-                res.status(406).json({msg:"Email ja cadastrado"});
+                return res.status(406).json({msg:"Email ja cadastrado"});
             }else{
                 await userRepository.save(user);
-                res.status(201).json({msg:"Usuario criado"});
+                return res.status(201).json({msg:"Usuario criado"});
             }
 
         }catch(error){
-            res.status(500).json({msg:`${error}`});
+           return res.status(500).json({msg:`${error}`});
         }
     }
-    public async login(req: Request, res: Response): Promise<void> {
+    public async login(req: Request, res: Response): Promise<Response> {
         try{
             await validateLogin(req.body);
             const email:string = req.body.email;
             const password:string = req.body.password;
             const user = await userRepository.returnUser(email,password);
             if(user){
-                res.status(200).json({msg:"Login feito"});
+                return res.status(200).json({msg:"Login feito"});
             }else{
-                res.status(401).json({msg:"Usuario não cadastrado"});
+                return res.status(401).json({msg:"Usuario não cadastrado"});
             }
         }catch(error){
-            res.status(500).json({msg:`${error}`});
+            return res.status(500).json({msg:`${error}`});
         }
     }
 }
