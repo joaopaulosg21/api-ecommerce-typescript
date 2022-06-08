@@ -2,6 +2,8 @@ import { IUser } from "./types/IUser";
 import { IUserService } from "./types/IUserService";
 import { UserRepository } from "./UserRepository";
 import { validateEmail, validateLogin, validateUser } from "../validators/validateUser";
+import { secret } from "../config";
+import { sign } from "jsonwebtoken";
 export class UserService implements IUserService{
     public userRepository: UserRepository;
 
@@ -31,7 +33,8 @@ export class UserService implements IUserService{
             const password:string = body.password;
             const user = await this.userRepository.returnUser(email,password);
             if(user){
-                return {status:200,msg:"Login feito"};
+                const token = sign({"id":user.id},secret);
+                return {status:200,msg:`token:${token}`}
             }else{
                 return {status:401,msg:"Usuario não cadastrado"};
             }

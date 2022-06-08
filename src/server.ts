@@ -1,11 +1,6 @@
 import { app } from "./app";
-import { config } from "dotenv";
-config({
-    path:".env"
-});
-
-const port = process.env.PORT;
-
+import { port } from "./config";
 app.listen(port,()=>{
     console.log(`Servidor rodando na porta ${port}`)
 })
+
