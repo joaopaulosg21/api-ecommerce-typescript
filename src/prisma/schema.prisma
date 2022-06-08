@@ -16,10 +16,18 @@ model users {
   password String
   email String
   createdAt DateTime @default(now())
+  cart cart?
 }
 
 model products {
   id Int @id @default(autoincrement())
   name String
   price Float
+}
+
+model cart {
+  id Int @id @default(autoincrement())
+  items Json
+  userId Int @unique
+  user users @relation(fields: [userId],references: [id])
 }

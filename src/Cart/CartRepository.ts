@@ -1,0 +1,13 @@
+import { PrismaClient,cart } from "@prisma/client";
+import { ICart } from "./types/ICart";
+import { ICartRepository } from "./types/ICartRepository";
+
+export class CartRepository implements ICartRepository{
+    public model:PrismaClient;
+    constructor(){
+        this.model = new PrismaClient();
+    }
+    public async viewCartByUserId(userId: number): Promise<cart | null> {
+        return this.model.cart.findFirst({where:{userId:userId}})
+    }
+}
