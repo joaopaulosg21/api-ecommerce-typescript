@@ -1,5 +1,7 @@
-import { Request,Response } from "express";
+import { UserRepository } from "../UserRepository";
+import { IUser } from "./IUser";
 export interface IUserService{
-    saveUser(req:Request,res:Response):Promise<Response>;
-    login(req:Request,res:Response):Promise<Response>;
+    userRepository:UserRepository;
+    save(user:IUser):Promise<Object>;
+    login(body:IUser):Promise<Object>;
 }

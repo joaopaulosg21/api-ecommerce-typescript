@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { UserService } from "../Users/UserService";
+import { UserController } from "../Users/UserController";
 const userRouter = Router();
-const user = new UserService();
+const user = new UserController();
 
-userRouter.post("/new",user.saveUser);
+userRouter.post("/new",user.newUser);
 userRouter.post("/login",user.login)
 
 export { userRouter };
