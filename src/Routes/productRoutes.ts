@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { ProductService } from "../Products/ProductService";
-const product = new ProductService();
+import { ProductController } from "../Products/types/ProductController";
+const product = new ProductController();
 const productRouter = Router();
 
-productRouter.post("/new",product.saveProduct)
+productRouter.post("/new",product.newProduct)
 
 export { productRouter };

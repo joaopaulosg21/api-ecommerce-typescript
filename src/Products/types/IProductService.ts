@@ -1,4 +1,7 @@
-import { Request,Response} from "express"
+import { ProductRepository } from "../ProductRepository";
+import { IProduct } from "./IProduct";
+
 export interface IProductService{
-    saveProduct(req:Request,res:Response):Promise<Response>;
+    productRepository:ProductRepository
+    save(product:IProduct):Promise<object>;
 }
