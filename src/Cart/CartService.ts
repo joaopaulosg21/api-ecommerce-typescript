@@ -37,9 +37,20 @@ export class CartService implements ICartService{
             if(product){
                 if(cart){
                     const arr:any = cart.items;
-                    arr.push(product)
-                    const updatedCart = await this.cartRepository.addItem(arr,decoded.id);
-                    return {status:200,msg:updatedCart}
+                    const result = arr.filter((item:any)=>{
+                        if(item.id == product.id){
+                            return item
+                        }
+                    });
+                    if(result.length == 1){
+                        result[0].quantidade++;
+                        const updatedCart = await this.cartRepository.addItem(arr,decoded.id);
+                        return {status:200,msg:updatedCart}
+                    }else{
+                        arr.push(product);
+                        const updatedCart = await this.cartRepository.addItem(arr,decoded.id);
+                        return {status:200,msg:updatedCart}
+                    }
                 }else{
                     const cart:ICart = {
                         userId:decoded.id,

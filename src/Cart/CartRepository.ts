@@ -16,7 +16,7 @@ export class CartRepository implements ICartRepository{
         return this.model.cart.create({
             data:{
                 items:cart.items,
-                userId:cart.userId
+                userId:cart.userId,
             }
         });
     }

@@ -23,6 +23,7 @@ model products {
   id Int @id @default(autoincrement())
   name String
   price Float
+  quantidade Int @default(1)
 }
 
 model cart {
