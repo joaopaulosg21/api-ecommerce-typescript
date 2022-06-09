@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient, products } from "@prisma/client";
 import { IProduct } from "./types/IProduct";
 import { IProductRepository } from "./types/IProductRepository";
 
@@ -15,5 +15,9 @@ export class ProductRepository implements IProductRepository{
                 price:product.price
             }
         });
+    }
+    
+    public async viewProductById(productId: number): Promise<products | null> {
+        return this.model.products.findFirst({where:{id:productId}});
     }
 }

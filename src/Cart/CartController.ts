@@ -13,4 +13,15 @@ export class CartController implements ICartController{
             return res.status(500).json({msg:"Não possui token"});
         }
     }
+
+    public async addItem(req: Request, res: Response): Promise<Response> {
+        const header = req.headers["authorization"];
+        const productId = Number(req.params.id);
+        if(header){
+            const response:any = await cartService.addItem(header,productId);
+            return res.status(response.status).json({msg:response.msg})
+        }else{
+            return res.status(500).json({msg:"Não possui token"});
+        }
+    }
 }
