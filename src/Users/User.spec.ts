@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app } from "../app"
+import { app } from "../app";
 
 describe("Testes das rotas de users",()=>{
     test("Teste de adicionar user",async()=>{
@@ -13,7 +13,6 @@ describe("Testes das rotas de users",()=>{
         const response = await request(app)
         .post("/users/login")
         .send({email:"teste3",password:"123"});
-        console.log(response)
         expect(response.statusCode).toEqual(200);
         expect(response.body.msg.length).toBeGreaterThan(0);
     })
