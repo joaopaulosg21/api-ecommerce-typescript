@@ -36,7 +36,7 @@ export class UserService implements IUserService{
                 const token = sign({"id":user.id},secret);
                 return {status:200,msg:`token:${token}`}
             }else{
-                return {status:401,msg:"Usuario não cadastrado"};
+                return {status:401,msg:"Email ou senha invalidos"};
             }
         }catch(error){
             return {status:500,msg:`${error}`};
