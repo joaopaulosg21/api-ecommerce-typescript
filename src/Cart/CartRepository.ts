@@ -30,4 +30,7 @@ export class CartRepository implements ICartRepository{
         });
     }
 
+    public deleteCart(cart:cart): Promise<cart | null> {
+        return this.model.cart.delete({where:{id:cart.id}});
+    }
 }

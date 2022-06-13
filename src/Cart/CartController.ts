@@ -24,4 +24,14 @@ export class CartController implements ICartController{
             return res.status(500).json({msg:"Não possui token"});
         }
     }
+
+    public async deleteCart(req: Request, res: Response): Promise<Response> {
+        const header = req.headers["authorization"];
+        if(header){
+            const response:any = await cartService.deleteCart(header);
+            return res.status(response.status).json({msg:response.msg});
+        }else{
+            return res.status(500).json({msg:"Não possui token"});
+        }
+    }
 }

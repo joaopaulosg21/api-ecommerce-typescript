@@ -66,4 +66,20 @@ export class CartService implements ICartService{
             return {status:500,msg:`${error}`};
         }
     }
+
+    public async deleteCart(header: string): Promise<object> {
+        try{
+            const token = header.split(" ")[1];
+            const decoded:any = verify(token,secret);
+            const cart = await this.cartRepository.viewCartByUserId(decoded.id);
+            if(cart){
+                await this.cartRepository.deleteCart(cart);
+                return {status:200,msg:"Carrinho deletado"};
+            }else{
+                return {status:404,msg:"Carrinho não existe"};
+            }
+        }catch(error){
+            return {status:500,msg:`${error}`};
+        }
+    }
 }

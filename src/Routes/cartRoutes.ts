@@ -6,5 +6,6 @@ const cartRouter = Router();
 
 cartRouter.get("/",verifyToken,cart.viewCart);
 cartRouter.post("/addItem/:id",verifyToken,cart.addItem);
+cartRouter.delete("/deleteCart/",verifyToken,cart.deleteCart)
 
 export {cartRouter};

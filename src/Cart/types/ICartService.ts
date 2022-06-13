@@ -7,4 +7,5 @@ export interface ICartService{
     productRepository:ProductRepository;
     viewCartByUserId(header:string):Promise<object>;
     addItem(header:string,productId:number):Promise<object>;
+    deleteCart(header:string):Promise<object>;
 }
